@@ -67,5 +67,9 @@ Cell.prototype.heuristic = function (goal) {
   return distance;
 };
 
-
-//  3- Show function
+//Show function
+Cell.prototype.show = function(color,w,h) {
+  fill(color);
+  stroke(0);
+  rect(this.x * w, this.y * h, w-1, h-1)
+};
