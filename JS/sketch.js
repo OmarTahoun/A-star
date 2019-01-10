@@ -1,7 +1,7 @@
 // Result optimal path
 let path = [];
 // size of the grid
-let rows = cols = 25;
+let rows = cols = 50;
 
 let grid;
 let start, end;
@@ -11,7 +11,7 @@ let open = []
 let closed = []
 
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(800, 800);
   w = width / cols;
   h = height / rows;
 
@@ -25,6 +25,13 @@ function setup() {
 
 
 function draw() {
+  if (open.length > 0) {
+    search();
+  }else{
+    // No solution
+    // console.log("finished");
+  }
+
   // Draw the grid;
   for (var i = 0; i <rows; i++) {
     for (var j = 0; j<cols; j++){
@@ -40,11 +47,8 @@ function draw() {
     open[i].show(color(0,255,0), w,h)
   }
 
-   // Draw the search process
-  if (open.length > 0) {
-    search();
-  }else{
-    // No solution
-    // console.log("finished");
-  }
+  // Draw the search process
+ for (var i = 0; i<path.length; i++){
+   path[i].show(color(0,0,255), w, h);
+ }
 }

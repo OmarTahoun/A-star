@@ -34,22 +34,19 @@ function search() {
     open.splice(0,1)
     closed.push(q)
 
+    path = [];
+    let temp = q;
+    path.push(temp);
+    while(temp.cameFrom){
+      path.push(temp.cameFrom);
+      temp = temp.cameFrom;
+    }
+
+
     // If we Reach the end Print the best path
     if (q == end) {
       console.log("Done");
-      let temp = q;
-      path.push(temp);
-      while(temp.cameFrom){
-        path.push(temp.cameFrom);
-        temp = temp.cameFrom;
-      }
-
-      // Print the path
-      for(var i = 0; i<path.length; i++){
-        console.log(path[i].x, path[i].y);
-      }
-      // exit the while loob
-      open = [];
+      open = []
       return 1;
     }
 
