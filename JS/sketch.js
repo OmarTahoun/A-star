@@ -1,7 +1,7 @@
 // Result optimal path
 let path = [];
 // size of the grid
-let rows = cols = 50;
+let rows = cols = 25;
 
 let grid;
 let start, end;
@@ -19,17 +19,19 @@ function setup() {
   grid = createGrid();
   start = grid[0][0]
   end = grid[rows-1][cols-1]
-  open.push(start)
-  // Start the search....
+  start.blocked = false;
+  end.blocked = false;
+  open.push(start);
 }
 
 
 function draw() {
   if (open.length > 0) {
+    // Start the search....
     search();
   }else{
     // No solution
-    // console.log("finished");
+    // console.log("no solution");
   }
 
   // Draw the grid;

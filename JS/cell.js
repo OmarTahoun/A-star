@@ -12,6 +12,9 @@ function Cell(x, y) {
   this.neighbors = [];
   this.cameFrom = undefined;
   this.blocked = false;
+  if(random(1) < 0.3){
+    this.blocked = true;
+  }
 }
 
 // Gets the neighbors for all cells in a given grid
@@ -70,6 +73,9 @@ Cell.prototype.heuristic = function (goal) {
 //Show function
 Cell.prototype.show = function(color,w,h) {
   fill(color);
+  if(this.blocked){
+    fill(0);
+  }
   stroke(0);
   rect(this.x * w, this.y * h, w-1, h-1)
 };

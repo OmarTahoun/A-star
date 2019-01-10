@@ -60,7 +60,7 @@ function search() {
       let temp_f = temp_g + temp_h;
 
       // IF the neighbor is not already passed
-      if (!closed.includes(neighbor)) {
+      if (!closed.includes(neighbor) && !neighbor.blocked) {
         // If the neighbor is not checked before
         if (!open.includes(neighbor)) {
           // Check it
