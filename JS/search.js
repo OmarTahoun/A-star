@@ -50,6 +50,7 @@ function search() {
       }
       // exit the while loob
       open = [];
+      return 1;
     }
 
     // Calculate the cost for all the neighbors
