@@ -7,8 +7,8 @@ let grid;
 let start, end;
 let w, h;
 
-let open = []
-let closed = []
+let open;
+let closed;
 
 var slider, step, search;
 function setup() {
@@ -34,6 +34,8 @@ function setup() {
   end = grid[rows-1][cols-1]
   start.blocked = false;
   end.blocked = false;
+  open = [];
+  closed = [];
   open.push(start);
 
 
@@ -49,18 +51,14 @@ function changeSize() {
   end = grid[rows-1][cols-1]
   start.blocked = false;
   end.blocked = false;
+  path = []
+  open = [];
+  closed = [];
+  open.push(start);
 }
 
 
 function draw() {
-  // if (open.length > 0) {
-  //   // Start the search....
-  //   search();
-  // }else{
-  //   // No solution
-  //   // console.log("no solution");
-  // }
-
   // Draw the grid;
   for (var i = 0; i <rows; i++) {
     for (var j = 0; j<cols; j++){
