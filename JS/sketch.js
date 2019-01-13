@@ -10,10 +10,14 @@ let w, h;
 let open = []
 let closed = []
 
+var input;
 function setup() {
   createCanvas(800, 800);
-  var input = createInput();
-  input.position(820, 800);
+  input = createInput();
+  input.position(90, 820);
+  button = createButton('submit');
+  button.position(input.x+ input.width, 820);
+  button.mousePressed(changeSize);
   w = width / cols;
   h = height / rows;
 
@@ -28,15 +32,23 @@ function setup() {
 
 }
 
+function changeSize() {
+  var size = input.value();
+  rows = cols = size;
+  grid = createGrid();
+  w = width / cols;
+  h = height / rows;
+}
+
 
 function draw() {
-  if (open.length > 0) {
-    // Start the search....
-    search();
-  }else{
-    // No solution
-    // console.log("no solution");
-  }
+  // if (open.length > 0) {
+  //   // Start the search....
+  //   search();
+  // }else{
+  //   // No solution
+  //   // console.log("no solution");
+  // }
 
   // Draw the grid;
   for (var i = 0; i <rows; i++) {
