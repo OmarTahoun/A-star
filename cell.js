@@ -89,6 +89,13 @@ Cell.prototype.clicked = function () {
         if(mode.value() == 'Blocks'){
           // Make cell blocked
           this.blocked = !this.blocked;
+
+          // Getting the neighbors of the cells
+          for (var i=0; i<rows; i++ ){
+            for (var j=0; j<cols; j++){
+              grid[i][j].get_neighbors(grid, rows, cols);
+            }
+          }
         }
         else if (mode.value() == 'Start'){
           // Make cell as the start point
