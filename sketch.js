@@ -55,7 +55,7 @@ function setup() {
   mode.option('End');
 
   var t = createP('Choose what to edit: ').addClass('text');
-  t.position(mode.x+5, mode.y-mode.height-40);
+  t.position(mode.x+5, mode.y-mode.height-30);
 
   save = createButton('Save');
   save.position(clear.x , mode.y);
