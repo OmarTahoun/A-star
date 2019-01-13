@@ -15,6 +15,19 @@ This is a demonstration of the A*  search algorithm, I did it in both JS and pyt
 
 - Saving the search result as an image to your device.
 
+## What everything does:
+- Slider : sets the size of the grid.
+
+- Step : moves one step in the search for the end point.
+
+- search : Searching for the full & optimal path to the end point.
+
+- clear : Removes all the blocks from the grid.
+
+- Reset : resets the canvas for a new grid.
+
+- Drop Down list : Chooses what do you want to edit, Blocks/ Start point / end point.
+
 ## Built with:
 - [P5.js](https://p5js.org/)
 

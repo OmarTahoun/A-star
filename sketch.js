@@ -23,7 +23,8 @@ function setup() {
   slider.position(190, 250);
   slider.input(changeSize);
   slider.addClass("slider")
-  var p = createP('Set Grid Size: ').addClass('text');
+
+  var p = createP('Set Grid Size:').addClass('text');
   p.position(slider.x+5, slider.y-slider.height-40);
 
   step = createButton('Step');
@@ -52,6 +53,9 @@ function setup() {
   mode.option('Blocks');
   mode.option('Start');
   mode.option('End');
+
+  var t = createP('Choose what to edit: ').addClass('text');
+  t.position(mode.x+5, mode.y-mode.height-20);
 
   save = createButton('Save');
   save.position(clear.x , mode.y);
