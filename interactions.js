@@ -47,3 +47,7 @@ function wipe() {
     }
   }
 }
+
+function saveImg() {
+  saveCanvas("A_star", "png");
+}

@@ -10,7 +10,7 @@ let w, h;
 let open;
 let closed;
 
-var slider, step, search, clear, reset, mode;
+var slider, step, search, clear, reset, mode, save;
 
 // Set up the canvas and all the interactivity stuff.
 function setup() {
@@ -50,6 +50,11 @@ function setup() {
   mode.option('Blocks');
   mode.option('Start');
   mode.option('End');
+
+  save = createButton('Save');
+  save.position(clear.x , mode.y);
+  save.mousePressed(saveImg);
+  save.addClass('save');
 
   w = width / cols;
   h = height / rows;
