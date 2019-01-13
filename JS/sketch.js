@@ -16,30 +16,37 @@ var slider, step, search, clear, reset, mode;
 function setup() {
 
 
-  createCanvas(800, 800);
+  var canva = createCanvas(800, 800);
+  canva.position((windowWidth - width) / 1.2, (windowHeight - height) / 2);
 
   slider = createSlider(5, 50, 25, 5);
-  slider.position(70, 820);
+  slider.position(190, 250);
   slider.input(changeSize);
+  slider.addClass("slider")
 
   step = createButton('Step');
-  step.position(slider.x + slider.width+10, 820);
+  step.position(slider.x, slider.y + slider.height + 60);
   step.mousePressed(oneSstep);
+  step.addClass('step');
 
   search = createButton('Search');
-  search.position(step.x + step.width+10, 820);
+  search.position(step.x+ step.width + 10, step.y );
   search.mousePressed(fullSearch);
+  search.addClass('search');
 
   clear = createButton('Clear');
-  clear.position(search.x + search.width+10, 820);
+  clear.position(search.x + search.width + 10, search.y);
   clear.mousePressed(wipe);
+  clear.addClass('clear');
 
   reset = createButton('Reset');
-  reset.position(clear.x + clear.width+10, 820);
+  reset.position(clear.x + clear.width + 10, clear.y);
   reset.mousePressed(startOver);
+  reset.addClass('reset');
 
-  mode = createRadio('mode');
-  mode.position(reset.x + reset.width+10, 820);
+  mode = createSelect('mode');
+  mode.position(step.x, step.y + step.height + 60);
+  mode.addClass('mode');
   mode.option('Blocks');
   mode.option('Start');
   mode.option('End');
