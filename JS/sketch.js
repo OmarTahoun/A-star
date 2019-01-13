@@ -12,6 +12,8 @@ let closed = []
 
 function setup() {
   createCanvas(800, 800);
+  var input = createInput();
+  input.position(820, 800);
   w = width / cols;
   h = height / rows;
 
@@ -22,6 +24,8 @@ function setup() {
   start.blocked = false;
   end.blocked = false;
   open.push(start);
+
+
 }
 
 
