@@ -21,7 +21,10 @@ function createGrid() {
   return grid;
 }
 
+
+// Searches only one step ahead
 function oneSstep() {
+  if (open.length > 0) {
     // Sort the cells based their cost
     open.sort(function(a, b) {
       if(a.f < b.f) return -1;
@@ -72,10 +75,11 @@ function oneSstep() {
       neighbor.f = temp_f;
       neighbor.cameFrom = q;
     }
+    }
   }
 }
 
-
+// Makes a Full search in the grid
 function fullSearch() {
   while (open.length > 0) {
     // Sort the cells based their cost

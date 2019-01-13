@@ -11,8 +11,13 @@ let open;
 let closed;
 
 var slider, step, search, clear, reset, mode;
+
+// Set up the canvas and all the interactivity stuff.
 function setup() {
+
+
   createCanvas(800, 800);
+
   slider = createSlider(5, 50, 25, 5);
   slider.position(70, 820);
   slider.input(changeSize);
@@ -42,7 +47,6 @@ function setup() {
   w = width / cols;
   h = height / rows;
 
-
   grid = createGrid();
   start = grid[0][0]
   end = grid[rows-1][cols-1]
@@ -51,53 +55,6 @@ function setup() {
   open = [];
   closed = [];
   open.push(start);
-
-
-}
-function startOver() {
-  grid = createGrid();
-  w = width / cols;
-  h = height / rows;
-  start = grid[0][0]
-  end = grid[rows-1][cols-1]
-  start.blocked = false;
-  end.blocked = false;
-  path = []
-  open = [];
-  closed = [];
-  open.push(start);
-}
-
-function changeSize() {
-  var size = slider.value();
-  rows = cols = size;
-  grid = createGrid();
-  w = width / cols;
-  h = height / rows;
-  start = grid[0][0]
-  end = grid[rows-1][cols-1]
-  start.blocked = false;
-  end.blocked = false;
-  path = []
-  open = [];
-  closed = [];
-  open.push(start);
-}
-
-function mousePressed() {
-  for (var i = 0; i <rows; i++) {
-    for (var j = 0; j<cols; j++){
-      grid[i][j].clicked();
-    }
-  }
-}
-
-function wipe() {
-  for (var i = 0; i <rows; i++) {
-    for (var j = 0; j<cols; j++){
-      grid[i][j].blocked = false;
-    }
-  }
 }
 
 function draw() {

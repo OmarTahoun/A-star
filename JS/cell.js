@@ -80,18 +80,24 @@ Cell.prototype.show = function(color,w,h) {
   rect(this.x * w, this.y * h, w-1, h-1)
 };
 
+// If a cell is clicked
 Cell.prototype.clicked = function () {
+  // Check if the mouse is over a cell in the grid
   if (mouseX > this.x * w && mouseX < this.x * w + (w-1) &&
       mouseY > this.y * h && mouseY < this.y * h + (h-1)){
+        // Check the mode
         if(mode.value() == 'Blocks'){
+          // Make cell blocked
           this.blocked = !this.blocked;
         }
         else if (mode.value() == 'Start'){
+          // Make cell as the start point
           start = grid[this.x][this.y];
           open = [];
           open.push(start);
         }
         else if (mode.value() == 'End'){
+          // Make Cell as the end point
           end = grid[this.x][this.y];
           }
       }
