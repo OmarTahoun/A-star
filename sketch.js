@@ -23,7 +23,7 @@ function setup() {
   slider.position(190, 250);
   slider.input(changeSize);
   slider.addClass("slider")
-  var p = createP('Set Grid Size').addClass('text');
+  var p = createP('Set Grid Size: ').addClass('text');
   p.position(slider.x+5, slider.y-slider.height-40);
 
   step = createButton('Step');
