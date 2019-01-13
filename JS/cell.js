@@ -79,3 +79,20 @@ Cell.prototype.show = function(color,w,h) {
   stroke(0);
   rect(this.x * w, this.y * h, w-1, h-1)
 };
+
+Cell.prototype.clicked = function () {
+  if (mouseX > this.x * w && mouseX < this.x * w + (w-1) &&
+      mouseY > this.y * h && mouseY < this.y * h + (h-1)){
+        if(mode.value() == 'Blocks'){
+          this.blocked = !this.blocked;
+        }
+        else if (mode.value() == 'Start'){
+          start = grid[this.x][this.y];
+          open = [];
+          open.push(start);
+        }
+        else if (mode.value() == 'End'){
+          end = grid[this.x][this.y];
+          }
+      }
+};

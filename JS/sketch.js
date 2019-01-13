@@ -10,7 +10,7 @@ let w, h;
 let open;
 let closed;
 
-var slider, step, search;
+var slider, step, search, clear, reset, mode;
 function setup() {
   createCanvas(800, 800);
   slider = createSlider(5, 50, 25, 5);
@@ -24,6 +24,20 @@ function setup() {
   search = createButton('Search');
   search.position(step.x + step.width+10, 820);
   search.mousePressed(fullSearch);
+
+  clear = createButton('Clear');
+  clear.position(search.x + search.width+10, 820);
+  clear.mousePressed(wipe);
+
+  reset = createButton('Reset');
+  reset.position(clear.x + clear.width+10, 820);
+  reset.mousePressed(startOver);
+
+  mode = createRadio('mode');
+  mode.position(reset.x + reset.width+10, 820);
+  mode.option('Blocks');
+  mode.option('Start');
+  mode.option('End');
 
   w = width / cols;
   h = height / rows;
@@ -39,6 +53,19 @@ function setup() {
   open.push(start);
 
 
+}
+function startOver() {
+  grid = createGrid();
+  w = width / cols;
+  h = height / rows;
+  start = grid[0][0]
+  end = grid[rows-1][cols-1]
+  start.blocked = false;
+  end.blocked = false;
+  path = []
+  open = [];
+  closed = [];
+  open.push(start);
 }
 
 function changeSize() {
@@ -57,12 +84,35 @@ function changeSize() {
   open.push(start);
 }
 
+function mousePressed() {
+  for (var i = 0; i <rows; i++) {
+    for (var j = 0; j<cols; j++){
+      grid[i][j].clicked();
+    }
+  }
+}
+
+function wipe() {
+  for (var i = 0; i <rows; i++) {
+    for (var j = 0; j<cols; j++){
+      grid[i][j].blocked = false;
+    }
+  }
+}
 
 function draw() {
   // Draw the grid;
   for (var i = 0; i <rows; i++) {
     for (var j = 0; j<cols; j++){
-      grid[i][j].show(color(255), w, h);
+      if (grid[i][j] == start) {
+        grid[i][j].show(color(0, 255, 0), w, h);
+      }
+      else if (grid[i][j] == end) {
+        grid[i][j].show(color(250, 0, 230), w, h);
+      }
+      else{
+        grid[i][j].show(color(255), w, h);
+      }
     }
   }
 
@@ -76,6 +126,14 @@ function draw() {
 
   // Draw the search process
  for (var i = 0; i<path.length; i++){
-   path[i].show(color(0,0,255), w, h);
+   if (path[i]== start) {
+     path[i].show(color(0, 255, 0), w, h);
+   }
+   else if (path[i] == end) {
+     path[i].show(color(250, 0, 230), w, h);
+   }
+   else{
+     path[i].show(color(0,0,255), w, h);
+   }
  }
 }
