@@ -10,14 +10,21 @@ let w, h;
 let open = []
 let closed = []
 
-var input;
+var slider, step, search;
 function setup() {
   createCanvas(800, 800);
-  input = createInput();
-  input.position(90, 820);
-  button = createButton('submit');
-  button.position(input.x+ input.width, 820);
-  button.mousePressed(changeSize);
+  slider = createSlider(5, 50, 25, 5);
+  slider.position(70, 820);
+  slider.input(changeSize);
+
+  step = createButton('Step');
+  step.position(slider.x + slider.width+10, 820);
+  step.mousePressed(oneSstep);
+
+  search = createButton('Search');
+  search.position(step.x + step.width+10, 820);
+  search.mousePressed(fullSearch);
+
   w = width / cols;
   h = height / rows;
 
@@ -33,11 +40,15 @@ function setup() {
 }
 
 function changeSize() {
-  var size = input.value();
+  var size = slider.value();
   rows = cols = size;
   grid = createGrid();
   w = width / cols;
   h = height / rows;
+  start = grid[0][0]
+  end = grid[rows-1][cols-1]
+  start.blocked = false;
+  end.blocked = false;
 }
 
 
