@@ -10,10 +10,10 @@ let open;
 let closed;
 let full = false;
 
-var slider, step, search, clear, reset, mode, save;
+var slider, step, search, clear, reset, mode, save, diagonal;
+let font;
 // Set up the canvas and all the interactivity stuff.
 function setup() {
-
 
   var canva = createCanvas(800, 800);
   canva.position((windowWidth - width) / 1.2, (windowHeight - height) / 2);
@@ -47,10 +47,17 @@ function setup() {
 
   mode = createSelect('mode');
   mode.position(step.x, step.y + step.height + 60);
-  mode.addClass('mode');
+  mode.addClass('drop');
   mode.option('Blocks');
   mode.option('Start');
   mode.option('End');
+
+  diagonal = createSelect('diagonal');
+  diagonal.position(step.x, mode.y + mode.height + 60);
+  diagonal.addClass('drop');
+  diagonal.option('Diagonal');
+  diagonal.option('No-Diagonal');
+  diagonal.changed(reloadNeighbors);
 
   var t = createP('Choose what to edit: ').addClass('text');
   t.position(mode.x+5, mode.y-mode.height-30);
@@ -62,6 +69,7 @@ function setup() {
 
   w = width / cols;
   h = height / rows;
+  font = w/3;
 
   grid = createGrid();
   start = grid[0][0]
@@ -78,7 +86,7 @@ function draw() {
   if (full) {
     oneStep();
   }
-  
+
   // Draw the grid;
   for (var i = 0; i <rows; i++) {
     for (var j = 0; j<cols; j++){
@@ -94,13 +102,32 @@ function draw() {
     }
   }
 
+
   for (var i=0; i<closed.length; i++){
-    closed[i].show(color(255,0,0), w,h)
+    if (closed[i]== start) {
+      closed[i].show(color(0, 255, 0), w, h);
+    }
+    else if (closed[i] == end) {
+      closed[i].show(color(250, 0, 230), w, h);
+    }
+    else{
+      closed[i].show(color(255,0,0), w, h);
+    }
   }
 
+
   for (var i=0; i<open.length; i++){
-    open[i].show(color(0,255,0), w,h)
+    if (open[i]== start) {
+      open[i].show(color(0, 255, 0), w, h);
+    }
+    else if (open[i] == end) {
+      open[i].show(color(250, 0, 230), w, h);
+    }
+    else{
+      open[i].show(color(0,255,0), w, h);
+    }
   }
+
 
   // Draw the search process
  for (var i = 0; i<path.length; i++){

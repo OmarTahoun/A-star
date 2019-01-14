@@ -12,7 +12,7 @@ function Cell(x, y) {
   this.neighbors = [];
   this.cameFrom = undefined;
   this.blocked = false;
-  if(random(1) < 0.3){
+  if(random(1) < 0.4){
     this.blocked = true;
   }
 }
@@ -27,13 +27,15 @@ Cell.prototype.get_neighbors = function (grid, rows, cols) {
   if (x<rows-1){
     // Cell to the Right
     this.neighbors.push(grid[x+1][y]);
-    if (y>0){
-      // Right Up
-      this.neighbors.push(grid[x+1][y-1]);
-    }
-    if (y < cols-1){
-      // Right Down
-      this.neighbors.push(grid[x+1][y+1])
+    if (diagonal.value() == 'Diagonal') {
+      if (y>0){
+        // Right Up
+        this.neighbors.push(grid[x+1][y-1]);
+      }
+      if (y < cols-1){
+        // Right Down
+        this.neighbors.push(grid[x+1][y+1])
+      }
     }
   }
 
@@ -41,13 +43,15 @@ Cell.prototype.get_neighbors = function (grid, rows, cols) {
   if (x>0){
     // Cell to the Left
     this.neighbors.push(grid[x-1][y])
-    if (y > 0) {
-      // Left up
-      this.neighbors.push(grid[x-1][y-1])
-    }
-    if (y < cols-1){
-      // Left Down
-      this.neighbors.push(grid[x-1][y+1])
+    if (diagonal.value() == 'Diagonal') {
+      if (y > 0) {
+        // Left up
+        this.neighbors.push(grid[x-1][y-1])
+      }
+      if (y < cols-1){
+        // Left Down
+        this.neighbors.push(grid[x-1][y+1])
+      }
     }
   }
 
@@ -66,7 +70,12 @@ Cell.prototype.get_neighbors = function (grid, rows, cols) {
 
 // Heurestic calculation
 Cell.prototype.heuristic = function (goal) {
-  let distance = Math.max(Math.abs(this.x - goal.x), Math.abs(this.y - goal.y))
+  let distance;
+  if (diagonal.value() == 'Diagonal') {
+    distance = Math.max(Math.abs(this.x - goal.x), Math.abs(this.y - goal.y));
+  }else{
+    distance = Math.abs(this.x - goal.x) +  Math.abs(this.y - goal.y);
+  }
   return distance;
 };
 
@@ -77,7 +86,13 @@ Cell.prototype.show = function(color,w,h) {
     fill(0);
   }
   stroke(0);
-  rect(this.x * w, this.y * h, w-1, h-1)
+  rect(this.x * w, this.y * h, w-1, h-1);
+  if (open.includes(grid[this.x][this.y]) || closed.includes(grid[this.x][this.y]) || path.includes(grid[this.x][this.y])) {
+    fill(255);
+    textAlign(CENTER, CENTER);
+    textSize(font);
+    text(this.f, this.x * w-w/2 + w-1, this.y * h-h/2 + h-1);
+  }
 };
 
 // If a cell is clicked
@@ -89,13 +104,7 @@ Cell.prototype.clicked = function () {
         if(mode.value() == 'Blocks'){
           // Make cell blocked
           this.blocked = !this.blocked;
-
-          // Getting the neighbors of the cells
-          for (var i=0; i<rows; i++ ){
-            for (var j=0; j<cols; j++){
-              grid[i][j].get_neighbors(grid, rows, cols);
-            }
-          }
+          reloadNeighbors();
         }
         else if (mode.value() == 'Start'){
           // Make cell as the start point

@@ -55,7 +55,17 @@ function wipe() {
 function fullSearch() {
   full = true;
 }
-
+// Save canvas as image
 function saveImg() {
   saveCanvas("A_star", "png");
+}
+
+function reloadNeighbors() {
+  // Getting the neighbors of the cells
+  for (var i=0; i<rows; i++ ){
+    for (var j=0; j<cols; j++){
+      grid[i][j].neighbors = [];
+      grid[i][j].get_neighbors(grid, rows, cols);
+    }
+  }
 }

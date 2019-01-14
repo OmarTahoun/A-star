@@ -37,15 +37,6 @@ function oneStep() {
     open.splice(0,1)
     closed.push(q)
 
-    path = [];
-    let temp = q;
-    path.push(temp);
-    while(temp.cameFrom){
-      path.push(temp.cameFrom);
-      temp = temp.cameFrom;
-    }
-
-
     // If we Reach the end Print the best path
     if (q == end) {
       console.log("Done");
@@ -68,13 +59,22 @@ function oneStep() {
         if (!open.includes(neighbor)) {
           // Check it
           open.push(neighbor);
+          neighbor.g = temp_g;
+          neighbor.f = temp_f;
+          neighbor.cameFrom = q;
       } else if(temp_f >= neighbor.f){
         // No, it's not a better path
         continue;
       }
-      neighbor.f = temp_f;
-      neighbor.cameFrom = q;
     }
     }
+
+        path = [];
+        let temp = q;
+        path.push(temp);
+        while(temp.cameFrom){
+          path.push(temp.cameFrom);
+          temp = temp.cameFrom;
+        }
   }
 }

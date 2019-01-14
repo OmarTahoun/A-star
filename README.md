@@ -26,7 +26,9 @@ This is a demonstration of the A*  search algorithm, I did it in both JS and pyt
 
 - __Reset__ : resets the canvas for a new grid.
 
-- __Drop Down list__ : Chooses what do you want to edit, Blocks/ Start point / end point.
+- __Edit Drop Down list__ : Chooses what do you want to edit, Blocks/ Start point / end
+ point.
+ - __Diagonal Drop Down List__ : Toggles the mode of the search weather the diagonal movement is allowed or not. 
 
 ## Built with:
 - [P5.js](https://p5js.org/)
