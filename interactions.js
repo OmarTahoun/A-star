@@ -11,6 +11,7 @@ function startOver() {
   open = [];
   closed = [];
   open.push(start);
+  full = false;
 }
 
 // Change the grid size
@@ -28,6 +29,7 @@ function changeSize() {
   open = [];
   closed = [];
   open.push(start);
+  full = false;
 }
 
 // Mouse is pressed event handeled by the cell function "Clicked"
@@ -46,6 +48,12 @@ function wipe() {
       grid[i][j].blocked = false;
     }
   }
+}
+
+
+// Allows Full search in the grid
+function fullSearch() {
+  full = true;
 }
 
 function saveImg() {

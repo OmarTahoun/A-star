@@ -1,24 +1,22 @@
-// Result optimal path
-let path = [];
 // size of the grid
 let rows = cols = 25;
-
 let grid;
 let start, end;
 let w, h;
 
+// Result optimal path
+let path = [];
 let open;
 let closed;
+let full = false;
 
 var slider, step, search, clear, reset, mode, save;
-
 // Set up the canvas and all the interactivity stuff.
 function setup() {
 
 
   var canva = createCanvas(800, 800);
   canva.position((windowWidth - width) / 1.2, (windowHeight - height) / 2);
-
   slider = createSlider(5, 50, 25, 5);
   slider.position(190, 250);
   slider.input(changeSize);
@@ -29,7 +27,7 @@ function setup() {
 
   step = createButton('Step');
   step.position(slider.x, slider.y + slider.height + 60);
-  step.mousePressed(oneSstep);
+  step.mousePressed(oneStep);
   step.addClass('step');
 
   search = createButton('Search');
@@ -76,6 +74,11 @@ function setup() {
 }
 
 function draw() {
+  // Only if the user wants full search keep running this
+  if (full) {
+    oneStep();
+  }
+  
   // Draw the grid;
   for (var i = 0; i <rows; i++) {
     for (var j = 0; j<cols; j++){
