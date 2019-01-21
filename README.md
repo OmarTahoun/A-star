@@ -15,6 +15,8 @@ This is a demonstration of the A*  search algorithm, I did it in both JS and pyt
 
 - Saving the search result as an image to your device.
 
+- User can choose to move digonally or not.
+
 ## What everything does:
 - __Slider__ : sets the size of the grid.
 
