@@ -15,9 +15,9 @@ let font;
 // Set up the canvas and all the interactivity stuff.
 function setup() {
 
-  var canva = createCanvas(800, 800);
+  var canva = createCanvas(600, 600);
   canva.position((windowWidth - width) / 1.2, (windowHeight - height) / 2);
-  slider = createSlider(5, 50, 25, 5);
+  slider = createSlider(10, 100, 25, 10);
   slider.position(190, 250);
   slider.input(changeSize);
   slider.addClass("slider")
